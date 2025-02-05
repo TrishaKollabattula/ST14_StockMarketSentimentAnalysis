@@ -8,7 +8,7 @@
     <script src="script.js" defer></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
@@ -24,24 +24,28 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            position: relative;
         }
 
         header {
-            font-size: 2em;
+            font-size: 2.5em;
             font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
             animation: fadeIn 2s ease-in-out;
         }
 
         .info {
             margin: 20px;
-            font-size: 1.2em;
+            font-size: 1.3em;
+            max-width: 80%;
+            line-height: 1.6;
             animation: slideIn 2s ease-in-out;
         }
 
         .animated-bg {
             position: relative;
             width: 100%;
-            height: 300px;
+            height: 350px;
             overflow: hidden;
             background: url('stock-market-bg.jpg') no-repeat center center/cover;
             animation: backgroundAnimation 5s infinite alternate ease-in-out;
@@ -49,7 +53,7 @@
 
         @keyframes backgroundAnimation {
             from { transform: scale(1); }
-            to { transform: scale(1.1); }
+            to { transform: scale(1.05); }
         }
 
         #predict-btn {
@@ -82,25 +86,38 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .stock-animation {
+        .graph-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: url('animated-graph.gif') no-repeat center center/cover;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .money-animation {
             position: absolute;
             width: 50px;
-            animation: moveStocks 10s linear infinite;
+            animation: moveMoney 5s linear infinite;
+            opacity: 0.8;
         }
 
-        @keyframes moveStocks {
-            from { transform: translateY(100vh) rotate(0deg); opacity: 0.7; }
-            to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        @keyframes moveMoney {
+            from { transform: translateY(100vh) rotate(0deg); opacity: 0.9; }
+            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        .stock1 { left: 10%; animation-duration: 7s; }
-        .stock2 { left: 30%; animation-duration: 9s; }
-        .stock3 { left: 50%; animation-duration: 11s; }
-        .stock4 { left: 70%; animation-duration: 8s; }
-        .stock5 { left: 90%; animation-duration: 10s; }
+        .money1 { left: 15%; animation-duration: 6s; }
+        .money2 { left: 35%; animation-duration: 7s; }
+        .money3 { left: 55%; animation-duration: 8s; }
+        .money4 { left: 75%; animation-duration: 9s; }
+        .money5 { left: 90%; animation-duration: 10s; }
     </style>
 </head>
 <body>
+    <div class="graph-bg"></div>
     <div class="container">
         <header>
             <h1>Stock Market Sentiment Analysis</h1>
@@ -116,10 +133,10 @@
             <p>&copy; 2025 Stock Insights</p>
         </footer>
     </div>
-    <img src="stock-up.png" class="stock-animation stock1">
-    <img src="stock-down.png" class="stock-animation stock2">
-    <img src="stock-up.png" class="stock-animation stock3">
-    <img src="stock-down.png" class="stock-animation stock4">
-    <img src="stock-up.png" class="stock-animation stock5">
+    <img src="money.png" class="money-animation money1">
+    <img src="money.png" class="money-animation money2">
+    <img src="money.png" class="money-animation money3">
+    <img src="money.png" class="money-animation money4">
+    <img src="money.png" class="money-animation money5">
 </body>
 </html>
