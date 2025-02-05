@@ -1,1 +1,125 @@
-<h1>HIIII</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Sentiment Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        header {
+            font-size: 2em;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .info {
+            margin: 20px;
+            font-size: 1.2em;
+            animation: slideIn 2s ease-in-out;
+        }
+
+        .animated-bg {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: url('stock-market-bg.jpg') no-repeat center center/cover;
+            animation: backgroundAnimation 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes backgroundAnimation {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        #predict-btn {
+            font-size: 1.5em;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            background: #28a745;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0px 5px 15px rgba(40, 167, 69, 0.5);
+            transition: transform 0.3s ease-in-out, background 0.3s;
+            position: relative;
+            z-index: 10;
+        }
+
+        #predict-btn:hover {
+            transform: scale(1.1);
+            background: #218838;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .stock-animation {
+            position: absolute;
+            width: 50px;
+            animation: moveStocks 10s linear infinite;
+        }
+
+        @keyframes moveStocks {
+            from { transform: translateY(100vh) rotate(0deg); opacity: 0.7; }
+            to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .stock1 { left: 10%; animation-duration: 7s; }
+        .stock2 { left: 30%; animation-duration: 9s; }
+        .stock3 { left: 50%; animation-duration: 11s; }
+        .stock4 { left: 70%; animation-duration: 8s; }
+        .stock5 { left: 90%; animation-duration: 10s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stock Market Sentiment Analysis</h1>
+            <p>Analyze the sentiment of stock market trends in real time</p>
+        </header>
+        <section class="info">
+            <p>The stock market sentiment analysis uses advanced AI to predict market trends based on news, social media, and historical data.</p>
+        </section>
+        <div class="animated-bg">
+            <button id="predict-btn">Predict Sentiment</button>
+        </div>
+        <footer>
+            <p>&copy; 2025 Stock Insights</p>
+        </footer>
+    </div>
+    <img src="stock-up.png" class="stock-animation stock1">
+    <img src="stock-down.png" class="stock-animation stock2">
+    <img src="stock-up.png" class="stock-animation stock3">
+    <img src="stock-down.png" class="stock-animation stock4">
+    <img src="stock-up.png" class="stock-animation stock5">
+</body>
+</html>
