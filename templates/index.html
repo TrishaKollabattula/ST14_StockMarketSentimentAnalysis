@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Sentiment Analysis</title>
+
+    <!-- CSS Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #141414;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        header {
+            background: #333;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header .logo {
+            text-align: center;
+            color: #fff;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        header .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        header .nav-links li {
+            margin: 0 20px;
+        }
+
+        header .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s ease;
+        }
+
+        header .nav-links a:hover {
+            color: #28a745;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1526743294461-3b586d4110f4') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero h2 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .btn-predict {
+            background-color: #28a745;
+            padding: 15px 30px;
+            font-size: 22px;
+            border: none;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .btn-predict:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        /* Sentiment Overview Section */
+        .overview {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #222;
+        }
+
+        .overview h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .overview-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #28a745;
+            color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            width: 250px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #333;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        footer ul li {
+            margin: 0 15px;
+        }
+
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        footer ul li a:hover {
+            color: #28a745;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Stock Market Sentiment Analysis</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Analysis</a></li>
+            <li><a href="#">Explore</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero Section with Animated Background -->
+    <section class="hero">
+        <div>
+            <h2>Feel the Market, Predict the Profit</h2>
+            <p>Get insights into market sentiment and improve your investment strategies.</p>
+            <button class="btn-predict" onclick="predictSentiment()">Predict Sentiment</button>
+        </div>
+    </section>
+
+    <!-- Stock Market Sentiment Overview Section -->
+    <section class="overview">
+        <h2>Stock Market Sentiment Overview</h2>
+        <div class="overview-cards">
+            <div class="card">
+                <h3>Positive Sentiment</h3>
+                <p>70% of market sentiment is positive today.</p>
+            </div>
+            <div class="card">
+                <h3>Negative Sentiment</h3>
+                <p>30% of market sentiment is negative today.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div>
+            <p>&copy; 2025 StockSentiment. All rights reserved.</p>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to handle the "Predict Sentiment" button click
+        function predictSentiment() {
+            alert("Sentiment prediction feature will be implemented soon.");
+        }
+    </script>
+
+</body>
+</html>
