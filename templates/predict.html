@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradeTune</title>
+    <title>TradeTune - Sentiment Analysis</title>
     <style>
         /* Reset and basic styling */
         * {
@@ -19,7 +19,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('https://media.giphy.com/media/Mc1yxvp8fIGuYXHJI0/giphy.gif?cid=790b7611zmw99oeq8closghanm3bzh7mnmvrzqbn2trw2ekw&ep=v1_gifs_search&rid=giphy.gif&ct=g'); /* Add background GIF */
+            background-image: url('https://media.giphy.com/media/Mc1yxvp8fIGuYXHJI0/giphy.gif?cid=790b7611zmw99oeq8closghanm3bzh7mnmvrzqbn2trw2ekw&ep=v1_gifs_search&rid=giphy.gif&ct=g'); /* Background GIF */
             background-size: 100% 100%; /* Make the GIF stretch to fit the entire screen */
             background-position: center; /* Center the GIF */
             background-repeat: no-repeat; /* Don't repeat the GIF */
@@ -41,7 +41,7 @@
         .brand {
             font-family: 'Lato', sans-serif;
             font-size: 28px;
-            color: #FFFFFF; /* Changed to white */
+            color: #FFFFFF; /* White color */
             font-weight: 700;
         }
 
@@ -53,35 +53,54 @@
         }
 
         .title {
-            font-size: 48px; /* Increased size */
-            color: #FFFFFF; /* Changed to white */
+            font-size: 48px;
+            color: #FFFFFF; /* White color */
             font-weight: 700;
             margin-bottom: 10px;
         }
 
         .quote {
-            font-size: 18px; /* Increased size */
-            color: #FFFFFF; /* Changed to white */
-            margin-bottom: 20px; /* Reduced margin bottom to bring the quote closer to the button */
+            font-size: 18px;
+            color: #FFFFFF; /* White color */
+            margin-bottom: 20px;
         }
 
-        .predict-btn {
-            padding: 15px 40px; /* Increased size of the button */
+        .sentiment-form {
+            margin-top: 20px; /* Space between quote and form */
+        }
+
+        .input-box {
+            width: 400px;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #FFFFFF; /* White border */
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2); /* Slight transparent input background */
+            color: #FFFFFF;
+            text-align: center;
+            outline: none;
+        }
+
+        .input-box::placeholder {
+            color: rgba(255, 255, 255, 0.7); /* Light placeholder color */
+        }
+
+        .know-btn {
+            padding: 15px 40px;
             background-color: #3E2DFF; /* Blue button */
             color: #FFFFFF;
             font-family: 'Lato', sans-serif;
-            font-size: 20px; /* Increased button font size */
+            font-size: 20px;
             border: none;
             border-radius: 30px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            text-decoration: none; /* Ensure the text decoration is removed */
-            margin-top: 20px; /* Keeps the spacing between quote and button */
-            position: relative; /* Allow positioning of the button */
-            top: 40px; /* Moves the button down by 20px */
+            margin-top: 20px; /* Lower the button */
+            position: relative;
+            top: 20px; /* Move button slightly down */
         }
-        
-        .predict-btn:hover {
+
+        .know-btn:hover {
             background-color: #FF0000; /* Red on hover */
         }
 
@@ -103,13 +122,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <span class="brand">TradeTune</span> <!-- Removed the emoji -->
+            <span class="brand">TradeTune</span>
         </div>
         <div class="center-content">
             <h1 class="title">Sync with market sentiment</h1>
             <p class="quote">Understanding the market sentiment is key to making informed decisions</p>
-            <!-- Added an anchor tag around the button -->
-            <a href="/predict" class="predict-btn">Predict</a>
+            
+            <!-- Sentiment Analysis Form -->
+            <form class="sentiment-form" action="/predict" method="POST">
+                <input type="text" name="message" class="input-box" placeholder="Enter your message" required>
+                <br>
+                <button type="submit" class="know-btn">Know Sentiment</button>
+            </form>
         </div>
     </div>
 
