@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Market Sentiment Analysis</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    /* Main Content */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Animated Background */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: url('https://www.transparenttextures.com/patterns/black-linen.png');
+      animation: moveBackground 20s linear infinite;
+    }
+
+    /* Predict Button */
+    .predict-button {
+      margin-top: 50px;
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      color: #fff;
+      background: #ff6f61;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      transition: background 0.3s ease;
+    }
+
+    .predict-button:hover {
+      background: #ff3b2f;
+    }
+
+    /* Stock Market Info Section */
+    .info-section {
+      margin-top: 100px;
+      max-width: 800px;
+      text-align: center;
+      animation: slideUp 2s ease-in-out;
+    }
+
+    .info-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .info-section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes moveBackground {
+      from { background-position: 0 0; }
+      to { background-position: 100% 100%; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="background"></div>
+
+  <!-- Header -->
+  <header>
+    <h1>Stock Market Sentiment Analysis</h1>
+    <p>Unlock the power of sentiment analysis to predict market trends.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Predict Button -->
+    <button class="predict-button" onclick="predictSentiment()">Predict Sentiment</button>
+
+    <!-- Stock Market Info Section -->
+    <div class="info-section">
+      <h2>About Stock Market Sentiment</h2>
+      <p>
+        The stock market is influenced by a variety of factors, including economic indicators, company performance, and investor sentiment. Sentiment analysis involves using natural language processing (NLP) to analyze news articles, social media, and other text data to gauge the overall mood of the market. By understanding market sentiment, investors can make more informed decisions and potentially predict market movements.
+      </p>
+      <p>
+        Our platform leverages advanced AI algorithms to analyze sentiment in real-time, providing you with actionable insights to stay ahead in the market.
+      </p>
+    </div>
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    function predictSentiment() {
+      window.location.replace("/predict");
+    }
+  </script>
+</body>
+</html>
