@@ -1,242 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Market Sentiment Analysis</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Market Sentiment Analysis</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-    <!-- CSS Styles -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* Video Background */
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
 
-        /* Body Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #141414;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    /* Header Styles */
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 10;
+    }
 
-        /* Header Section */
-        header {
-            background: #333;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+    }
 
-        header .logo {
-            text-align: center;
-            color: #fff;
-            font-size: 30px;
-            font-weight: bold;
-        }
+    header nav {
+      display: flex;
+      gap: 20px;
+    }
 
-        header .nav-links {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
 
-        header .nav-links li {
-            margin: 0 20px;
-        }
+    header nav a:hover {
+      color: #FFD700;
+    }
 
-        header .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            transition: 0.3s ease;
-        }
+    /* Main Content Styling */
+    .content {
+      z-index: 1;
+      position: relative;
+      color: #fff;
+      max-width: 700px;
+      padding: 30px;
+    }
 
-        header .nav-links a:hover {
-            color: #28a745;
-        }
+    .content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
 
-        /* Hero Section */
-        .hero {
-            background: url('https://images.unsplash.com/photo-1526743294461-3b586d4110f4') no-repeat center center/cover;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
-        }
+    .content p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
 
-        .hero h2 {
-            font-size: 50px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+    /* Centered Button Styling */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-        .hero p {
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
+    .predict-btn {
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      color: #fff;
+      background-color: #75bf53;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
 
-        .btn-predict {
-            background-color: #28a745;
-            padding: 15px 30px;
-            font-size: 22px;
-            border: none;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
+    .predict-btn:hover {
+      background-color: #60adce;
+      transform: scale(1.1);
+    }
 
-        .btn-predict:hover {
-            background-color: #218838;
-            transform: scale(1.1);
-        }
+    /* Footer Styles */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9rem;
+      z-index: 10;
+    }
 
-        /* Sentiment Overview Section */
-        .overview {
-            padding: 50px 20px;
-            text-align: center;
-            background-color: #222;
-        }
+    footer p {
+      margin: 5px 0;
+    }
 
-        .overview h2 {
-            font-size: 36px;
-            margin-bottom: 30px;
-        }
+    footer a {
+      color: #FFD700;
+      text-decoration: none;
+      margin: 0 10px;
+    }
 
-        .overview-cards {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background-color: #28a745;
-            color: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            width: 250px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        /* Footer Section */
-        footer {
-            background-color: #333;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        footer ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        footer ul li {
-            margin: 0 15px;
-        }
-
-        footer ul li a {
-            color: #fff;
-            text-decoration: none;
-            transition: 0.3s ease;
-        }
-
-        footer ul li a:hover {
-            color: #28a745;
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-    </style>
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <div class="logo">
-            <h1>Stock Market Sentiment Analysis</h1>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Analysis</a></li>
-            <li><a href="#">Explore</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </header>
+  <!-- Background Video -->
+  <video autoplay muted loop class="background-video">
+    <source src="https://videos.pexels.com/video-files/29344546/12647214_1920_1080_30fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-    <!-- Hero Section with Animated Background -->
-    <section class="hero">
-        <div>
-            <h2>Feel the Market, Predict the Profit</h2>
-            <p>Get insights into market sentiment and improve your investment strategies.</p>
-            <button class="btn-predict" onclick="predictSentiment()">Predict Sentiment</button>
-        </div>
-    </section>
+  <!-- Header -->
+  <header>
+    <h1>📈 StockPulse AI </h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+    </nav>
+  </header>
 
-    <!-- Stock Market Sentiment Overview Section -->
-    <section class="overview">
-        <h2>Stock Market Sentiment Overview</h2>
-        <div class="overview-cards">
-            <div class="card">
-                <h3>Positive Sentiment</h3>
-                <p>70% of market sentiment is positive today.</p>
-            </div>
-            <div class="card">
-                <h3>Negative Sentiment</h3>
-                <p>30% of market sentiment is negative today.</p>
-            </div>
-        </div>
-    </section>
+  <!-- Main Content -->
+  <div class="content">
+    <h1>Stock Market Sentiment Analysis</h1>
+    <p>
+      Insights That Empower Your Investments!
+    </p>
+    <p>
+      Stay ahead of the market trends and make informed decisions with our innovative tools.
+    </p>
+    <div class="button-container">
+      <button class="predict-btn" id="predictButton">Predict Sentiment</button>
+    </div>
+  </div>
 
-    <!-- Footer Section -->
-    <footer>
-        <div>
-            <p>&copy; 2025 StockSentiment. All rights reserved.</p>
-            <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </footer>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Stock Sentiment. All Rights Reserved.</p>
+    <p>
+      <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+    </p>
+  </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Function to handle the "Predict Sentiment" button click
-        function predictSentiment() {
-            alert("Sentiment prediction feature will be implemented soon.");
-        }
-    </script>
+  <script>
+    // JavaScript for button interaction
+    document.getElementById('predictButton').addEventListener('click', function () {
+      window.location.href = '/predict'; // Redirects to /predict page
+    });
+  </script>
 
 </body>
 </html>

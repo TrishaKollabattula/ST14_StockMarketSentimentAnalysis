@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPulse AI - Market Sentiment Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            margin-top: 20px;
+            outline: none;
+        }
+
+        .input-box:focus {
+            border-color: #218838;
+            box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background-color: #218838;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">STOCKPULSE AI</h1>
+        <p class="subtitle">Market Sentiment Analyzer</p>
+        <p class="subtitle">Unlock the power of sentiment analysis to make smarter investment choices!</p>
+        <form action="/predict" method="POST">
+            <input type="text" name="message" class="input-box" placeholder="Enter your message here..." required>
+            <button type="submit" class="button">Get Sentiment</button>
+        </form>
+        <p class="footer">© 2025 StockPulse AI. All Rights Reserved.</p>
+    </div>
+</body>
+</html>
