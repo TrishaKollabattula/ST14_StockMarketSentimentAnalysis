@@ -1,96 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StockPulse AI - Market Sentiment Analysis</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Market Sentiment Analysis</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-        body {
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    /* Video Background */
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
 
-        .container {
-            background: #ffffff;
-            padding: 40px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-        }
+    /* Header Styles */
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 10;
+    }
 
-        .title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #28a745;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+    }
 
-        .subtitle {
-            font-size: 16px;
-            color: #555;
-            margin-top: 10px;
-        }
+    header nav {
+      display: flex;
+      gap: 20px;
+    }
 
-        .input-box {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 2px solid #28a745;
-            border-radius: 8px;
-            margin-top: 20px;
-            outline: none;
-        }
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
 
-        .input-box:focus {
-            border-color: #218838;
-            box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
-        }
+    header nav a:hover {
+      color: #FFD700;
+    }
 
-        .button {
-            width: 100%;
-            padding: 12px;
-            font-size: 18px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            margin-top: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    /* Main Content Styling */
+    .content {
+      z-index: 1;
+      position: relative;
+      color: #fff;
+      max-width: 700px;
+      padding: 30px;
+    }
 
-        .button:hover {
-            background-color: #218838;
-        }
+    .content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #777;
-        }
-    </style>
+    .content p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    /* Centered Button Styling */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .predict-btn {
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      color: #fff;
+      background-color: #75bf53;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .predict-btn:hover {
+      background-color: #60adce;
+      transform: scale(1.1);
+    }
+
+    /* Footer Styles */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9rem;
+      z-index: 10;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    footer a {
+      color: #FFD700;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">STOCKPULSE AI</h1>
-        <p class="subtitle">Market Sentiment Analyzer</p>
-        <p class="subtitle">Unlock the power of sentiment analysis to make smarter investment choices!</p>
-        <form action="/predict" method="POST">
-            <input type="text" name="message" class="input-box" placeholder="Enter your message here..." required>
-            <button type="submit" class="button">Get Sentiment</button>
-        </form>
-        <p class="footer">© 2025 StockPulse AI. All Rights Reserved.</p>
+
+  <!-- Background Video -->
+  <video autoplay muted loop class="background-video">
+    <source src="https://videos.pexels.com/video-files/29344546/12647214_1920_1080_30fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Header -->
+  <header>
+    <h1>📈 Stock Sentiment</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h1>Stock Market Sentiment Analysis</h1>
+    <p>
+      Welcome to our Stock Market Sentiment Analysis platform. Using cutting-edge technology, we analyze the sentiment of the stock market and provide you with actionable insights.
+    </p>
+    <p>
+      Stay ahead of the market trends and make informed decisions with our innovative tools.
+    </p>
+    <div class="button-container">
+      <button class="predict-btn" id="predictButton">Predict Sentiment</button>
     </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Stock Sentiment. All Rights Reserved.</p>
+    <p>
+      <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+    </p>
+  </footer>
+
+  <script>
+    // JavaScript for button interaction
+    document.getElementById('predictButton').addEventListener('click', function () {
+      window.location.href = '/predict'; // Redirects to /predict page
+    });
+  </script>
+
 </body>
 </html>

@@ -1,43 +1,50 @@
-from flask import Flask,render_template,request
-from test import TextToNum
+from flask import Flask, request, render_template
 import pickle
+from preprocess import transform_text  # Make sure this is defined properly
 
-app=Flask(__name__)
+# Initialize the Flask app
+app = Flask(__name__)
 
-@app.route("/")
+# Load the model and vectorizer
+with open("model.pickle", "rb") as m_file:
+    model = pickle.load(m_file)
+
+with open("vectorizer.pickle", "rb") as v_file:
+    vectorizer = pickle.load(v_file)
+
+# Define the routes
+@app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template('index.html')
 
-@app.route("/predict",methods=['POST','GET'])
+@app.route('/predict', methods=['POST'])
 def predict():
-    if request.method=="POST":
-        msg=request.form.get("message")
-        print(msg)
-        ob=TextToNum(msg)
-        ob.cleaner()
-        ob.token()
-        ob.removeStop()
-        st=ob.stemme()
-        stem_vector=" ".join(st)
+    message = request.form['message']
+    
+    # Apply preprocessing to the message (e.g., tokenization, cleaning)
+    transformed_text = transform_text(message)
+    
+    # Ensure transformed_text is a string (if it's a list, join it into a string)
+    if isinstance(transformed_text, list):
+        transformed_text = ' '.join(transformed_text)
 
-        with open("vectorizer.pickle","rb") as vc:
-            vectorizer=pickle.load(vc)
-        vcdata=vectorizer.transform([stem_vector]).toarray()
-        print(vcdata)
-        
-        with open("model.pickle","rb") as mc:
-            model=pickle.load(mc)
+    # Vectorize the input text
+    vectorized_text = vectorizer.transform([transformed_text])
 
-        pred=model.predict(vcdata)
-        print(pred)
-        
-       
+    # Predict sentiment (will now return 'positive' or 'negative')
+    sentiment = model.predict(vectorized_text)[0]
 
+    # Define sentiment responses
+    sentiment_responses = {
+        'positive': "The sentiment is positive! Market trends seem favorable.",
+        'negative': "The sentiment is negative. Consider analyzing further."
+    }
 
+    # Get the response based on the sentiment
+    response_text = sentiment_responses.get(sentiment, "Sentiment unclear.")
+    
+    return render_template('result.html', sentiment=sentiment, response=response_text)
 
-    else:
-        return render_template("predict.html")
+if __name__ == '__main__':
+    app.run(debug=True)
 
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0",port='5050')

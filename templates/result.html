@@ -1,70 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentiment Result</title>
-    <style>
-        body {
-            background: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment Analysis Result</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Times New Roman', serif;
+      background-color: #f9f9f9; /* Soft light background color */
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
 
-        .result-box {
-            padding: 20px 40px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out forwards;
-        }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
-        }
+    /* Result Box */
+    .result-box {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
 
-        .positive {
-            background: #00ff88;
-            color: #121212;
-            box-shadow: 0 0 20px #00ff88;
-        }
+    .result-box p {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #555;
+    }
 
-        .neutral {
-            background: #999;
-            color: #121212;
-            box-shadow: 0 0 20px #999;
-        }
+    /* Sentiment Styling */
+    .positive {
+      background-color: #28a745;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
 
-        .negative {
-            background: #ff4444;
-            color: #121212;
-            box-shadow: 0 0 20px #ff4444;
-        }
-    </style>
+    .negative {
+      background-color: #dc3545;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .neutral {
+      background-color: #ffc107;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    /* Space between the message and the back button */
+    .button-container {
+      margin-top: 30px;
+    }
+
+    /* Back Button Styling */
+    .back-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .back-btn:active {
+      background-color: #004085;
+    }
+  </style>
 </head>
 <body>
-    <div class="result-box" id="result">{{ sentiment }}</div>
 
-    <script>
-        const resultBox = document.getElementById('result');
-        const sentiment = resultBox.innerText;
+  <h1>Sentiment Analysis Result</h1>
 
-        if (sentiment.includes("Positive")) {
-            resultBox.classList.add("positive");
-        } else if (sentiment.includes("Neutral")) {
-            resultBox.classList.add("neutral");
-        } else if (sentiment.includes("Negative")) {
-            resultBox.classList.add("negative");
-        }
-    </script>
+  <div class="result-box">
+    <p>Your message sentiment is:</p>
+    
+    <!-- Sentiment Result -->
+    <div class="sentiment-result">
+      {% if sentiment == 'positive' %}
+        <div class="positive">{{ response }}</div>
+      {% elif sentiment == 'negative' %}
+        <div class="negative">{{ response }}</div>
+      {% else %}
+        <div class="neutral">{{ response }}</div>
+      {% endif %}
+    </div>
+
+    <!-- Back Button -->
+    <div class="button-container">
+      <a href="/" class="back-btn">Go Back</a>
+    </div>
+  </div>
+
 </body>
 </html>

@@ -138,6 +138,37 @@
     footer a:hover {
       color: #fff;
     }
+
+    /* Form Styles */
+    .input-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .input-container input {
+      padding: 10px;
+      font-size: 1rem;
+      width: 80%;
+      border: 2px solid #75bf53;
+      border-radius: 5px;
+      color: #333;
+    }
+
+    .input-container button {
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      margin-left: 10px;
+      color: #fff;
+      background-color: #75bf53;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .input-container button:hover {
+      background-color: #60adce;
+    }
   </style>
 </head>
 <body>
@@ -161,15 +192,16 @@
   <!-- Main Content -->
   <div class="content">
     <h1>Stock Market Sentiment Analysis</h1>
-    <p>
-      Insights That Empower Your Investments!
-    </p>
-    <p>
-      Stay ahead of the market trends and make informed decisions with our innovative tools.
-    </p>
-    <div class="button-container">
-      <button class="predict-btn" id="predictButton">Predict Sentiment</button>
-    </div>
+    <p>Insights That Empower Your Investments!</p>
+    <p>Stay ahead of the market trends and make informed decisions with our innovative tools.</p>
+
+    <!-- Sentiment Prediction Form -->
+    <form action="/predict" method="POST">
+      <div class="input-container">
+        <input type="text" name="message" placeholder="Enter stock news or analysis..." required>
+        <button type="submit">Predict Sentiment</button>
+      </div>
+    </form>
   </div>
 
   <!-- Footer -->
@@ -179,13 +211,6 @@
       <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
     </p>
   </footer>
-
-  <script>
-    // JavaScript for button interaction
-    document.getElementById('predictButton').addEventListener('click', function () {
-      window.location.href = '/predict'; // Redirects to /predict page
-    });
-  </script>
 
 </body>
 </html>
